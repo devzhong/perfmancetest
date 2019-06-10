@@ -1,5 +1,8 @@
 package com.ne.perfmance.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +16,8 @@ import java.util.Properties;
  */
 public class PropertiestUtil {
 
+    private final static Logger logger = LoggerFactory.getLogger(PropertiestUtil.class);
+
     public static String getValue(String key){
         InputStream ins = Thread.currentThread().getContextClassLoader().getResourceAsStream("serverConfig.properties");
         Properties prop = null;
@@ -20,10 +25,10 @@ public class PropertiestUtil {
             prop = new Properties();
             prop.load(ins);
         } catch (IOException e) {
-            System.out.println("err load ins error");
+            logger.error("err load ins error");
             e.printStackTrace();
         }
-        System.out.println("success load ins success");
+        logger.info("success load ins success");
         return prop.getProperty(key);
     }
 

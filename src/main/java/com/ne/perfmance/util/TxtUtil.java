@@ -1,5 +1,8 @@
 package com.ne.perfmance.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
 /**
@@ -9,6 +12,7 @@ import java.io.*;
  */
 public class TxtUtil {
 
+    private final static Logger logger = LoggerFactory.getLogger(TxtUtil.class);
     //存放文件路径
     private static final String FILENAME= "C:\\Users\\sa\\Desktop\\performancetest\\username.txt";
 
@@ -22,7 +26,7 @@ public class TxtUtil {
             e.printStackTrace();
         }
         if (fw == null){
-            System.out.println("err! fw is null");
+            logger.error("err! fw is null");
             return;
         }
         BufferedWriter bw = new BufferedWriter(fw);
@@ -32,7 +36,7 @@ public class TxtUtil {
                 bw.newLine();
                 phone = phone + 1;
             } catch (IOException e) {
-                System.out.println("error: write err！");
+                logger.error("error: write err！");
                 e.printStackTrace();
             }
         }
@@ -40,9 +44,9 @@ public class TxtUtil {
             bw.close();
             fw.close();
         } catch (IOException e) {
-            System.out.println("error: close err!");
+            logger.error("error: close err!");
             e.printStackTrace();
         }
-        System.out.println("success: write success");
+        logger.info("success: write success");
     }
 }

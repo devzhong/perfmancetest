@@ -3,6 +3,8 @@ package com.ne.perfmance.util;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -12,6 +14,8 @@ import java.io.*;
  * Date:2019/6/6 11:01
  */
 public class ExcelUtil {
+
+    private final static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
 
     private static final String ROLE = "超级管理员";
     private static final String ORGAN = "运营机构1-1";
@@ -29,7 +33,7 @@ public class ExcelUtil {
             e.printStackTrace();
         }
         if (ins == null){
-            System.out.println("error ins is null");
+            logger.error("error ins is null");
             return;
         }
         try {
@@ -39,20 +43,20 @@ public class ExcelUtil {
             e.printStackTrace();
         }
         if (wb == null){
-            System.out.println("error wb is null");
+            logger.error("error wb is null");
             return;
         }
         XSSFSheet sheet=wb.getSheet(sheetName);
         /*XSSFRow row = sheet.createRow(2);
         row.createCell(0).setCellValue("kobe");*/
-        System.out.println("start writting........");
+        logger.info("start writting........");
         try {
             writeByRow(sheet, 18900000000L, 100);
         }catch (Exception e){
-            System.out.println(" error  writeByRow error!!!");
+            logger.error(" error  writeByRow error!!!");
             e.printStackTrace();
         }
-        System.out.println("end writting........");
+        logger.info("end writting........");
 
         OutputStream op = null;
         try {
@@ -61,7 +65,7 @@ public class ExcelUtil {
             e.printStackTrace();
         }
         if (op == null){
-            System.out.println("err op is null!");
+            logger.error("err op is null!");
             return;
         }
         try {
